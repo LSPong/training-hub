@@ -23,10 +23,12 @@
             --success: #00e5a0;
             --danger: #ff4d6d;
             --warning: #ffb703;
+            --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --logo-text: 'Lightwheel AI';
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: var(--font-family);
             background: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
@@ -69,7 +71,10 @@
             display: flex; align-items: center; justify-content: center;
             font-size: 18px;
             box-shadow: 0 0 20px rgba(0, 200, 255, 0.4);
+            overflow: hidden;
         }
+
+        .logo-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
 
         .logo-text {
             font-size: 18px; font-weight: 700;
@@ -95,13 +100,14 @@
             100% { transform: translateX(-50%); }
         }
 
-        .nav { display: flex; gap: 4px; }
+        .nav { display: flex; gap: 4px; flex-wrap: wrap; }
 
         .nav-btn {
-            padding: 8px 16px; border: none; background: transparent;
+            padding: 8px 14px; border: none; background: transparent;
             color: var(--text-secondary); cursor: pointer; border-radius: 8px;
             font-size: 13px; font-weight: 500; transition: all 0.3s;
             display: flex; align-items: center; gap: 6px;
+            font-family: var(--font-family);
         }
 
         .nav-btn:hover { background: rgba(0, 200, 255, 0.1); color: var(--accent-blue); }
@@ -164,11 +170,7 @@
         .kpi-goal { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
 
         .progress-bar-wrap { background: rgba(255,255,255,0.06); border-radius: 100px; height: 8px; overflow: hidden; }
-
-        .progress-bar-fill {
-            height: 100%; border-radius: 100px;
-            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        .progress-bar-fill { height: 100%; border-radius: 100px; transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
 
         .kpi-badge {
             position: absolute; top: 20px; right: 20px;
@@ -246,7 +248,6 @@
             font-size: 12px; font-weight: 700; font-family: monospace;
         }
 
-        /* REMINDERS */
         .reminder-card {
             border-radius: 14px; padding: 20px;
             position: relative; overflow: hidden;
@@ -258,7 +259,6 @@
         .reminder-card p { font-size: 12px; line-height: 1.6; opacity: 0.85; }
         .reminder-icon { font-size: 28px; margin-bottom: 12px; }
 
-        /* CHECKLIST */
         .checklist-item {
             display: flex; align-items: center; gap: 14px;
             padding: 14px 16px; border-radius: 12px;
@@ -282,7 +282,6 @@
         .checklist-text { font-size: 14px; font-weight: 500; }
         .checklist-sub { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
 
-        /* ANNOUNCEMENTS */
         .announcement-item {
             display: flex; gap: 16px; padding: 18px 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -309,50 +308,34 @@
         .ann-body { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
         .ann-date { font-size: 11px; color: var(--text-secondary); margin-top: 6px; }
 
-        /* ===================== PROPS VISUAL GALLERY ===================== */
+        /* PROPS */
         .props-header-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-            gap: 12px;
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
         }
 
-        .props-filter-tabs {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
+        .props-filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
 
         .filter-tab {
-            padding: 6px 16px;
-            border-radius: 100px;
+            padding: 6px 16px; border-radius: 100px;
             border: 1px solid rgba(255,255,255,0.1);
-            background: transparent;
-            color: var(--text-secondary);
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
+            background: transparent; color: var(--text-secondary);
+            font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s;
+            font-family: var(--font-family);
         }
 
         .filter-tab:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
 
         .filter-tab.active {
             background: linear-gradient(135deg, rgba(123, 47, 255, 0.3), rgba(0, 200, 255, 0.2));
-            border-color: var(--accent-blue);
-            color: var(--accent-blue);
+            border-color: var(--accent-blue); color: var(--accent-blue);
         }
 
         .prop-image-card {
             background: var(--bg-card);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.3s;
-            cursor: pointer;
-            position: relative;
+            border-radius: 16px; overflow: hidden;
+            transition: all 0.3s; cursor: pointer; position: relative;
         }
 
         .prop-image-card::before {
@@ -369,133 +352,73 @@
         }
 
         .prop-img-wrap {
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
+            width: 100%; height: 200px; overflow: hidden;
             background: rgba(255,255,255,0.03);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: relative; display: flex; align-items: center; justify-content: center;
         }
 
-        .prop-img-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .prop-image-card:hover .prop-img-wrap img {
-            transform: scale(1.05);
-        }
+        .prop-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .prop-image-card:hover .prop-img-wrap img { transform: scale(1.05); }
 
         .prop-img-placeholder {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            color: var(--text-secondary);
-            font-size: 12px;
-            height: 100%;
-            width: 100%;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; gap: 8px;
+            color: var(--text-secondary); font-size: 12px;
+            height: 100%; width: 100%;
         }
 
-        .prop-img-placeholder .placeholder-icon {
-            font-size: 36px;
-            opacity: 0.4;
-        }
+        .prop-img-placeholder .placeholder-icon { font-size: 36px; opacity: 0.4; }
 
         .prop-category-chip {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            padding: 3px 10px;
-            border-radius: 100px;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            z-index: 2;
-            backdrop-filter: blur(8px);
+            position: absolute; top: 10px; left: 10px;
+            padding: 3px 10px; border-radius: 100px;
+            font-size: 10px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; z-index: 2; backdrop-filter: blur(8px);
         }
 
         .chip-correct { background: rgba(0, 229, 160, 0.25); color: var(--success); border: 1px solid rgba(0,229,160,0.4); }
         .chip-incorrect { background: rgba(255, 77, 109, 0.25); color: var(--danger); border: 1px solid rgba(255,77,109,0.4); }
         .chip-tip { background: rgba(0, 200, 255, 0.2); color: var(--accent-blue); border: 1px solid rgba(0,200,255,0.4); }
 
-        .prop-card-body {
-            padding: 16px;
-        }
-
-        .prop-card-title {
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: var(--text-primary);
-        }
-
-        .prop-card-desc {
-            font-size: 12px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
+        .prop-card-body { padding: 16px; }
+        .prop-card-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--text-primary); }
+        .prop-card-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
 
         .prop-card-tip {
-            margin-top: 10px;
-            padding: 8px 12px;
+            margin-top: 10px; padding: 8px 12px;
             background: rgba(0, 229, 200, 0.06);
             border-left: 3px solid var(--accent-teal);
             border-radius: 0 8px 8px 0;
-            font-size: 11px;
-            color: var(--accent-teal);
-            line-height: 1.5;
+            font-size: 11px; color: var(--accent-teal); line-height: 1.5;
         }
 
         /* LIGHTBOX */
         .lightbox-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.9);
-            backdrop-filter: blur(12px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 16px;
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.9); backdrop-filter: blur(12px);
+            z-index: 2000; align-items: center; justify-content: center;
+            flex-direction: column; gap: 16px;
         }
 
         .lightbox-overlay.open { display: flex; }
 
         .lightbox-img {
-            max-width: 90vw;
-            max-height: 75vh;
+            max-width: 90vw; max-height: 75vh;
             border-radius: 12px;
             box-shadow: 0 0 80px rgba(0, 229, 200, 0.2);
             object-fit: contain;
         }
 
-        .lightbox-info {
-            text-align: center;
-            max-width: 600px;
-        }
-
+        .lightbox-info { text-align: center; max-width: 600px; }
         .lightbox-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
         .lightbox-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
 
         .lightbox-close {
-            position: absolute;
-            top: 20px; right: 24px;
-            background: rgba(255,255,255,0.1);
-            border: none;
-            color: white;
-            font-size: 20px;
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
+            position: absolute; top: 20px; right: 24px;
+            background: rgba(255,255,255,0.1); border: none;
+            color: white; font-size: 20px;
+            width: 40px; height: 40px; border-radius: 50%;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
             transition: all 0.2s;
         }
 
@@ -514,9 +437,9 @@
             background: #0f1a2e;
             border: 1px solid rgba(0, 200, 255, 0.3);
             border-radius: 20px; padding: 28px;
-            width: 90%; max-width: 580px;
+            width: 90%; max-width: 620px;
             box-shadow: 0 20px 80px rgba(0, 200, 255, 0.15);
-            max-height: 85vh; overflow-y: auto;
+            max-height: 88vh; overflow-y: auto;
         }
 
         .modal h2 {
@@ -524,6 +447,29 @@
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
+
+        .modal-tabs {
+            display: flex; gap: 6px; margin-bottom: 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 16px; flex-wrap: wrap;
+        }
+
+        .modal-tab {
+            padding: 6px 14px; border-radius: 8px; border: none;
+            background: rgba(255,255,255,0.05); color: var(--text-secondary);
+            font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+            font-family: var(--font-family);
+        }
+
+        .modal-tab:hover { background: rgba(0,200,255,0.1); color: var(--accent-blue); }
+
+        .modal-tab.active {
+            background: linear-gradient(135deg, rgba(123, 47, 255, 0.3), rgba(0, 200, 255, 0.2));
+            color: var(--accent-blue); border: 1px solid var(--border-glow);
+        }
+
+        .modal-section { display: none; }
+        .modal-section.active { display: block; }
 
         .form-group { margin-bottom: 16px; }
 
@@ -540,7 +486,7 @@
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 10px; padding: 10px 14px;
             color: var(--text-primary); font-size: 14px;
-            outline: none; transition: all 0.3s; font-family: inherit;
+            outline: none; transition: all 0.3s; font-family: var(--font-family);
         }
 
         .form-group input:focus,
@@ -553,13 +499,22 @@
         .form-group textarea { min-height: 80px; resize: vertical; }
         .form-group select option { background: #0f1a2e; }
 
+        .form-group input[type="color"] {
+            padding: 4px; height: 42px; cursor: pointer;
+        }
+
+        .color-row {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+        }
+
         .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
 
-        .btn { padding: 10px 22px; border-radius: 10px; border: none; cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.3s; }
+        .btn { padding: 10px 22px; border-radius: 10px; border: none; cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.3s; font-family: var(--font-family); }
         .btn-primary { background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue)); color: white; }
         .btn-primary:hover { box-shadow: 0 4px 20px rgba(0, 200, 255, 0.4); transform: translateY(-1px); }
         .btn-ghost { background: rgba(255,255,255,0.06); color: var(--text-secondary); border: 1px solid rgba(255,255,255,0.1); }
         .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+        .btn-sm { padding: 6px 14px; font-size: 12px; }
 
         .edit-fab {
             position: fixed; bottom: 24px; right: 24px; z-index: 200;
@@ -568,6 +523,7 @@
             color: white; font-size: 14px; font-weight: 700; cursor: pointer;
             box-shadow: 0 4px 30px rgba(0, 200, 255, 0.4);
             display: flex; align-items: center; gap: 8px; transition: all 0.3s;
+            font-family: var(--font-family);
         }
 
         .edit-fab:hover { transform: translateY(-3px); box-shadow: 0 8px 40px rgba(0, 200, 255, 0.6); }
@@ -582,10 +538,10 @@
 
         .mtd-badge { background: rgba(0, 200, 255, 0.1); border: 1px solid rgba(0, 200, 255, 0.2); color: var(--accent-blue); padding: 2px 10px; border-radius: 100px; font-size: 10px; font-weight: 700; letter-spacing: 1px; }
 
-        .delete-btn { background: rgba(255,77,109,0.15); border: 1px solid rgba(255,77,109,0.3); color: var(--danger); padding: 4px 10px; border-radius: 6px; font-size: 11px; cursor: pointer; transition: all 0.2s; }
+        .delete-btn { background: rgba(255,77,109,0.15); border: 1px solid rgba(255,77,109,0.3); color: var(--danger); padding: 4px 10px; border-radius: 6px; font-size: 11px; cursor: pointer; transition: all 0.2s; font-family: var(--font-family); }
         .delete-btn:hover { background: rgba(255,77,109,0.3); }
 
-        .add-btn { display: flex; align-items: center; gap: 8px; padding: 10px 18px; background: rgba(0, 200, 255, 0.08); border: 1px dashed rgba(0, 200, 255, 0.3); border-radius: 10px; color: var(--accent-blue); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s; width: 100%; justify-content: center; margin-top: 12px; }
+        .add-btn { display: flex; align-items: center; gap: 8px; padding: 10px 18px; background: rgba(0, 200, 255, 0.08); border: 1px dashed rgba(0, 200, 255, 0.3); border-radius: 10px; color: var(--accent-blue); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s; width: 100%; justify-content: center; margin-top: 12px; font-family: var(--font-family); }
         .add-btn:hover { background: rgba(0, 200, 255, 0.15); border-color: var(--accent-blue); }
 
         .checklist-progress-wrap { margin-bottom: 24px; }
@@ -596,16 +552,10 @@
         .checklist-progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-purple), var(--accent-teal)); border-radius: 100px; transition: width 0.5s ease; }
 
         .img-preview-wrap {
-            width: 100%;
-            height: 120px;
-            border-radius: 8px;
-            overflow: hidden;
+            width: 100%; height: 120px; border-radius: 8px; overflow: hidden;
             background: rgba(255,255,255,0.04);
             border: 1px solid rgba(255,255,255,0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 8px;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 8px;
         }
 
         .img-preview-wrap img { width: 100%; height: 100%; object-fit: cover; }
@@ -613,27 +563,68 @@
 
         .prop-edit-block {
             background: rgba(255,255,255,0.03);
-            border-radius: 12px;
-            padding: 14px;
-            margin-bottom: 14px;
+            border-radius: 12px; padding: 14px; margin-bottom: 14px;
             border: 1px solid rgba(255,255,255,0.06);
         }
 
         .prop-edit-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;
         }
 
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text-secondary);
-        }
-
+        .empty-state { text-align: center; padding: 60px 20px; color: var(--text-secondary); }
         .empty-state .empty-icon { font-size: 48px; margin-bottom: 12px; opacity: 0.4; }
         .empty-state p { font-size: 14px; }
+
+        /* THEME PREVIEW */
+        .theme-preview {
+            border-radius: 12px; padding: 16px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            margin-bottom: 16px;
+        }
+
+        .theme-preview-label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+
+        .theme-preview-bar {
+            height: 6px; border-radius: 100px; margin-bottom: 8px;
+        }
+
+        .font-preview {
+            padding: 12px; border-radius: 8px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            margin-bottom: 8px; cursor: pointer; transition: all 0.2s;
+        }
+
+        .font-preview:hover { border-color: var(--accent-blue); }
+        .font-preview.selected { border-color: var(--accent-blue); background: rgba(0,200,255,0.06); }
+        .font-preview-name { font-size: 11px; color: var(--text-secondary); margin-bottom: 4px; }
+        .font-preview-sample { font-size: 16px; font-weight: 600; }
+
+        .logo-preview-wrap {
+            width: 100%; height: 80px; border-radius: 10px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 10px; overflow: hidden;
+        }
+
+        .logo-preview-wrap img { max-height: 60px; max-width: 90%; object-fit: contain; }
+
+        .section-divider {
+            border: none; border-top: 1px solid rgba(255,255,255,0.08);
+            margin: 20px 0;
+        }
+
+        .info-box {
+            background: rgba(0, 200, 255, 0.06);
+            border: 1px solid rgba(0, 200, 255, 0.2);
+            border-radius: 10px; padding: 12px 14px;
+            font-size: 12px; color: var(--text-secondary);
+            line-height: 1.6; margin-bottom: 16px;
+        }
+
+        .info-box strong { color: var(--accent-blue); }
     </style>
 </head>
 <body>
@@ -642,10 +633,10 @@
 <div class="header">
     <div class="header-inner">
         <div class="logo">
-            <div class="logo-icon">⚡</div>
+            <div class="logo-icon" id="header-logo-icon">⚡</div>
             <div>
-                <div class="logo-text">Lightwheel AI</div>
-                <div class="logo-sub">Training Hub</div>
+                <div class="logo-text" id="header-logo-text">Lightwheel AI</div>
+                <div class="logo-sub" id="header-logo-sub">Training Hub</div>
             </div>
         </div>
         <nav class="nav">
@@ -660,7 +651,7 @@
 
 <!-- TICKER -->
 <div class="ticker-wrap">
-    <div class="ticker">
+    <div class="ticker" id="ticker-el">
         <span>Welcome to Lightwheel AI Training Hub</span>
         <span>Check your daily checklist</span>
         <span>Review today's announcements</span>
@@ -797,12 +788,26 @@
 <div class="modal-overlay" id="editModal">
     <div class="modal">
         <h2>✏️ Trainer Control Panel</h2>
+        <div class="modal-tabs" id="modal-tabs"></div>
         <div id="modal-content"></div>
     </div>
 </div>
 
 <script>
+// ======================== DEFAULT DATA ========================
 let appData = {
+    theme: {
+        accentBlue: '#00c8ff',
+        accentPurple: '#7b2fff',
+        accentTeal: '#00e5c8',
+        bgPrimary: '#0a0a1a',
+        fontFamily: 'Segoe UI',
+        logoText: 'Lightwheel AI',
+        logoSubText: 'Training Hub',
+        logoUrl: '',
+        logoEmoji: '⚡',
+        tickerMessages: 'Welcome to Lightwheel AI Training Hub|Check your daily checklist|Review today\'s announcements|Keep up the great work!'
+    },
     kpi: { qaScore: 87, qaGoal: 92, hours: 340, hoursGoal: 500 },
     failedVideos: [
         { name: 'Video_Task_Annotation_v3.mp4', failures: 42, reason: 'Incorrect bounding box' },
@@ -843,79 +848,66 @@ let appData = {
         { tag: 'info', title: 'New Training Materials Available', body: 'Fresh training videos for NLP annotation tasks are now available in the resource library. These cover the most common error patterns.', date: '5 days ago', color: '#00c8ff' },
     ],
     props: [
-        {
-            title: 'Correct Bounding Box — Tight Fit',
-            desc: 'The bounding box should closely hug the object with minimal whitespace. This is the approved standard.',
-            tip: '✅ Always ensure all edges of the object are within the box with less than 5px margin.',
-            category: 'correct',
-            imageUrl: 'https://placehold.co/400x300/0d2a1a/00e5a0?text=✅+Correct+Bounding+Box'
-        },
-        {
-            title: 'Incorrect — Loose Bounding Box',
-            desc: 'This shows a bounding box that is too large, including unnecessary background. This will result in QA failure.',
-            tip: '❌ Do not leave excessive whitespace around the annotated object.',
-            category: 'incorrect',
-            imageUrl: 'https://placehold.co/400x300/2a0d0d/ff4d6d?text=❌+Loose+Bounding+Box'
-        },
-        {
-            title: 'Approved Category Tags Reference',
-            desc: 'Only use tags from this approved master list. The image shows all valid category labels for the current project.',
-            tip: '💡 Bookmark this image for quick reference during your annotation sessions.',
-            category: 'tip',
-            imageUrl: 'https://placehold.co/400x300/001a2e/00c8ff?text=💡+Approved+Tags+List'
-        },
-        {
-            title: 'Correct Timestamp Format',
-            desc: 'Audio transcriptions must follow the HH:MM:SS.mmm format exactly as shown. Milliseconds are required.',
-            tip: '✅ Example: 00:01:23.456 — always include milliseconds.',
-            category: 'correct',
-            imageUrl: 'https://placehold.co/400x300/0d2a1a/00e5a0?text=✅+Timestamp+Format'
-        },
-        {
-            title: 'Correct Multi-Label Annotation',
-            desc: 'When an object belongs to multiple categories, apply all relevant labels as shown in this example.',
-            tip: '✅ Multi-label annotations must be applied in the correct hierarchy order.',
-            category: 'correct',
-            imageUrl: 'https://placehold.co/400x300/0d2a1a/00e5a0?text=✅+Multi-Label+Example'
-        },
-        {
-            title: 'Incorrect — Overlapping Boxes',
-            desc: 'Overlapping bounding boxes on the same object are not allowed. Each object must have exactly one box.',
-            tip: '❌ Never draw duplicate or overlapping boxes on a single object.',
-            category: 'incorrect',
-            imageUrl: 'https://placehold.co/400x300/2a0d0d/ff4d6d?text=❌+Overlapping+Boxes'
-        },
-        {
-            title: 'Escalation Decision Tree',
-            desc: 'Use this visual guide to determine when to escalate a task vs. when to proceed with your best judgment.',
-            tip: '💡 When in doubt, always escalate. It is better to ask than to guess.',
-            category: 'tip',
-            imageUrl: 'https://placehold.co/400x300/001a2e/00c8ff?text=💡+Escalation+Guide'
-        },
-        {
-            title: 'Quality Checklist Visual',
-            desc: 'A visual summary of the 5-point quality check every submission must pass before being marked complete.',
-            tip: '💡 Run through this mental checklist before submitting each batch.',
-            category: 'tip',
-            imageUrl: 'https://placehold.co/400x300/001a2e/00c8ff?text=💡+Quality+Checklist'
-        },
+        { title: 'Correct Bounding Box — Tight Fit', desc: 'The bounding box should closely hug the object with minimal whitespace. This is the approved standard.', tip: '✅ Always ensure all edges of the object are within the box with less than 5px margin.', category: 'correct', imageUrl: 'https://placehold.co/400x300/0d2a1a/00e5a0?text=Correct+Bounding+Box' },
+        { title: 'Incorrect — Loose Bounding Box', desc: 'This shows a bounding box that is too large, including unnecessary background. This will result in QA failure.', tip: '❌ Do not leave excessive whitespace around the annotated object.', category: 'incorrect', imageUrl: 'https://placehold.co/400x300/2a0d0d/ff4d6d?text=Loose+Bounding+Box' },
+        { title: 'Approved Category Tags Reference', desc: 'Only use tags from this approved master list. The image shows all valid category labels for the current project.', tip: '💡 Bookmark this image for quick reference during your annotation sessions.', category: 'tip', imageUrl: 'https://placehold.co/400x300/001a2e/00c8ff?text=Approved+Tags+List' },
+        { title: 'Correct Timestamp Format', desc: 'Audio transcriptions must follow the HH:MM:SS.mmm format exactly as shown. Milliseconds are required.', tip: '✅ Example: 00:01:23.456 — always include milliseconds.', category: 'correct', imageUrl: 'https://placehold.co/400x300/0d2a1a/00e5a0?text=Timestamp+Format' },
     ]
 };
 
 let checklistState = {};
 let currentFilter = 'all';
+let currentModalSection = 'theme';
 
+// ======================== DB ========================
 async function loadFromDB() {
     try {
-        const saved = await window.db.get('lightwheel_hub_v3');
+        const saved = await window.db.get('lightwheel_hub_v4');
         if (saved) appData = { ...appData, ...saved };
     } catch(e) {}
 }
 
 async function saveToDB() {
-    try { await window.db.set('lightwheel_hub_v3', appData); } catch(e) {}
+    try { await window.db.set('lightwheel_hub_v4', appData); } catch(e) {}
 }
 
+// ======================== THEME APPLICATION ========================
+function applyTheme(t) {
+    const root = document.documentElement;
+    root.style.setProperty('--accent-blue', t.accentBlue);
+    root.style.setProperty('--accent-purple', t.accentPurple);
+    root.style.setProperty('--accent-teal', t.accentTeal);
+    root.style.setProperty('--bg-primary', t.bgPrimary);
+    root.style.setProperty('--border-glow', hexToRgba(t.accentBlue, 0.3));
+    root.style.setProperty('--font-family', `'${t.fontFamily}', system-ui, sans-serif`);
+
+    // Logo
+    document.getElementById('header-logo-text').textContent = t.logoText || 'Lightwheel AI';
+    document.getElementById('header-logo-sub').textContent = t.logoSubText || 'Training Hub';
+
+    const logoIcon = document.getElementById('header-logo-icon');
+    if (t.logoUrl && t.logoUrl.trim()) {
+        logoIcon.innerHTML = `<img src="${t.logoUrl}" alt="logo" onerror="this.parentElement.innerHTML='${t.logoEmoji || '⚡'}'">`;
+    } else {
+        logoIcon.innerHTML = t.logoEmoji || '⚡';
+    }
+
+    // Ticker
+    if (t.tickerMessages) {
+        const msgs = t.tickerMessages.split('|').filter(m => m.trim());
+        const doubled = [...msgs, ...msgs];
+        document.getElementById('ticker-el').innerHTML = doubled.map(m => `<span>${m.trim()}</span>`).join('');
+    }
+}
+
+function hexToRgba(hex, alpha) {
+    const r = parseInt(hex.slice(1,3), 16);
+    const g = parseInt(hex.slice(3,5), 16);
+    const b = parseInt(hex.slice(5,7), 16);
+    return `rgba(${r},${g},${b},${alpha})`;
+}
+
+// ======================== NAVIGATION ========================
 function showPage(page) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -932,6 +924,7 @@ function renderPage(page) {
     else if (page === 'props') renderProps();
 }
 
+// ======================== DASHBOARD ========================
 function renderDashboard() {
     const { kpi, failedVideos, taskIds } = appData;
     const qaPct = Math.min((kpi.qaScore / kpi.qaGoal) * 100, 100);
@@ -981,6 +974,7 @@ function renderDashboard() {
     `).join('');
 }
 
+// ======================== REMINDERS ========================
 function renderReminders() {
     document.getElementById('reminders-grid').innerHTML = appData.reminders.map(r => `
         <div class="reminder-card" style="background: ${r.color}; border: 1px solid ${r.border}; color: white;">
@@ -991,6 +985,7 @@ function renderReminders() {
     `).join('');
 }
 
+// ======================== CHECKLIST ========================
 function renderChecklist() {
     const today = new Date().toDateString();
     if (checklistState._date !== today) checklistState = { _date: today };
@@ -1018,6 +1013,7 @@ function toggleChecklist(i) {
     renderChecklist();
 }
 
+// ======================== ANNOUNCEMENTS ========================
 function renderAnnouncements() {
     document.getElementById('announcements-list').innerHTML = appData.announcements.map((a, i) => `
         <div class="announcement-item">
@@ -1035,6 +1031,7 @@ function renderAnnouncements() {
     `).join('');
 }
 
+// ======================== PROPS ========================
 function filterProps(cat, btn) {
     currentFilter = cat;
     document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
@@ -1042,14 +1039,10 @@ function filterProps(cat, btn) {
     renderPropsGallery();
 }
 
-function renderProps() {
-    renderPropsGallery();
-}
+function renderProps() { renderPropsGallery(); }
 
 function renderPropsGallery() {
-    const filtered = currentFilter === 'all'
-        ? appData.props
-        : appData.props.filter(p => p.category === currentFilter);
+    const filtered = currentFilter === 'all' ? appData.props : appData.props.filter(p => p.category === currentFilter);
 
     if (filtered.length === 0) {
         document.getElementById('props-gallery').innerHTML = `
@@ -1067,7 +1060,7 @@ function renderPropsGallery() {
         tip: '<span class="prop-category-chip chip-tip">💡 Tip</span>',
     };
 
-    document.getElementById('props-gallery').innerHTML = filtered.map((p, i) => {
+    document.getElementById('props-gallery').innerHTML = filtered.map((p) => {
         const idx = appData.props.indexOf(p);
         const hasImage = p.imageUrl && p.imageUrl.trim() !== '';
         return `
@@ -1107,7 +1100,9 @@ function closeLightbox(e) {
 // ======================== EDIT MODAL ========================
 function openEditModal() {
     const activePage = document.querySelector('.page.active').id.replace('page-', '');
-    renderModalContent(activePage);
+    currentModalSection = 'theme';
+    buildModalTabs(activePage);
+    renderModalSection('theme', activePage);
     document.getElementById('editModal').classList.add('open');
 }
 
@@ -1115,18 +1110,204 @@ function closeModal() { document.getElementById('editModal').classList.remove('o
 
 document.getElementById('editModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 
-function renderModalContent(section) {
+function buildModalTabs(activePage) {
+    const tabs = [
+        { id: 'theme', label: '🎨 Theme & Logo' },
+        { id: 'content', label: '📝 Content' },
+    ];
+
+    document.getElementById('modal-tabs').innerHTML = tabs.map(t => `
+        <button class="modal-tab ${t.id === 'theme' ? 'active' : ''}" onclick="switchModalTab('${t.id}', '${activePage}')">${t.label}</button>
+    `).join('');
+}
+
+function switchModalTab(tab, activePage) {
+    currentModalSection = tab;
+    document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    renderModalSection(tab, activePage);
+}
+
+function renderModalSection(section, activePage) {
     const mc = document.getElementById('modal-content');
 
-    if (section === 'dashboard') {
-        const { kpi } = appData;
+    if (section === 'theme') {
+        const t = appData.theme;
         mc.innerHTML = `
-            <h2>📊 Edit Dashboard KPIs</h2>
+            <div class="info-box">💡 Changes here update the <strong>look and feel</strong> of the entire site — colors, fonts, logo, and the ticker message.</div>
+
+            <div style="font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">🖼️ Logo & Branding</div>
+
+            <div class="form-group">
+                <label>Site Name (Logo Text)</label>
+                <input type="text" id="th-logo-text" value="${t.logoText || 'Lightwheel AI'}" placeholder="e.g. Lightwheel AI">
+            </div>
+            <div class="form-group">
+                <label>Sub-title (below logo)</label>
+                <input type="text" id="th-logo-sub" value="${t.logoSubText || 'Training Hub'}" placeholder="e.g. Training Hub">
+            </div>
+            <div class="form-group">
+                <label>Logo Emoji (if no image URL)</label>
+                <input type="text" id="th-logo-emoji" value="${t.logoEmoji || '⚡'}" placeholder="e.g. ⚡">
+            </div>
+            <div class="form-group">
+                <label>Logo Image URL (optional — replaces emoji)</label>
+                <div class="logo-preview-wrap" id="logo-preview-wrap">
+                    ${t.logoUrl ? `<img src="${t.logoUrl}" alt="logo preview" onerror="this.parentElement.innerHTML='<span style=\\'color:var(--text-secondary);font-size:12px;\\'>Image not loading</span>'">` : '<span style="color:var(--text-secondary);font-size:12px;">Paste a URL below to preview</span>'}
+                </div>
+                <input type="text" id="th-logo-url" value="${t.logoUrl || ''}" placeholder="https://your-logo-url.png" oninput="previewLogo()">
+            </div>
+
+            <hr class="section-divider">
+
+            <div style="font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">🎨 Color Palette</div>
+
+            <div class="color-row">
+                <div class="form-group">
+                    <label>Primary Accent (Blue)</label>
+                    <input type="color" id="th-blue" value="${t.accentBlue}" oninput="livePreviewColors()">
+                </div>
+                <div class="form-group">
+                    <label>Secondary Accent (Purple)</label>
+                    <input type="color" id="th-purple" value="${t.accentPurple}" oninput="livePreviewColors()">
+                </div>
+                <div class="form-group">
+                    <label>Tertiary Accent (Teal)</label>
+                    <input type="color" id="th-teal" value="${t.accentTeal}" oninput="livePreviewColors()">
+                </div>
+                <div class="form-group">
+                    <label>Background Color</label>
+                    <input type="color" id="th-bg" value="${t.bgPrimary}" oninput="livePreviewColors()">
+                </div>
+            </div>
+
+            <div class="theme-preview" id="color-preview">
+                <div class="theme-preview-label">Live Color Preview</div>
+                <div class="theme-preview-bar" id="preview-bar" style="background: linear-gradient(90deg, ${t.accentPurple}, ${t.accentBlue}, ${t.accentTeal});"></div>
+                <div style="font-size: 12px; color: var(--text-secondary);">These colors will apply to buttons, progress bars, and accents across the site.</div>
+            </div>
+
+            <hr class="section-divider">
+
+            <div style="font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">🔤 Font Style</div>
+
+            <div id="font-options">
+                ${[
+                    { name: 'Segoe UI', label: 'Segoe UI (Default — Clean & Modern)' },
+                    { name: 'Georgia', label: 'Georgia (Classic & Formal)' },
+                    { name: 'Courier New', label: 'Courier New (Monospace / Tech)' },
+                    { name: 'Arial', label: 'Arial (Simple & Universal)' },
+                    { name: 'Trebuchet MS', label: 'Trebuchet MS (Friendly & Bold)' },
+                ].map(f => `
+                    <div class="font-preview ${t.fontFamily === f.name ? 'selected' : ''}" onclick="selectFont('${f.name}')" id="font-opt-${f.name.replace(/\s/g,'_')}">
+                        <div class="font-preview-name">${f.label}</div>
+                        <div class="font-preview-sample" style="font-family: '${f.name}';">Lightwheel AI Training Hub — Aa Bb Cc 123</div>
+                    </div>
+                `).join('')}
+            </div>
+
+            <hr class="section-divider">
+
+            <div style="font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">📢 Ticker Messages</div>
+            <div class="form-group">
+                <label>Messages (separate with | pipe symbol)</label>
+                <textarea id="th-ticker">${t.tickerMessages || ''}</textarea>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveTheme()">💾 Save Theme</button>
+            </div>
+        `;
+    } else if (section === 'content') {
+        renderContentSection(activePage);
+    }
+}
+
+function previewLogo() {
+    const url = document.getElementById('th-logo-url').value;
+    const wrap = document.getElementById('logo-preview-wrap');
+    if (url.trim()) {
+        wrap.innerHTML = `<img src="${url}" alt="logo preview" onerror="this.parentElement.innerHTML='<span style=\\'color:var(--text-secondary);font-size:12px;\\'>Image not loading</span>'">`;
+    } else {
+        wrap.innerHTML = '<span style="color:var(--text-secondary);font-size:12px;">Paste a URL below to preview</span>';
+    }
+}
+
+function livePreviewColors() {
+    const blue = document.getElementById('th-blue').value;
+    const purple = document.getElementById('th-purple').value;
+    const teal = document.getElementById('th-teal').value;
+    const bar = document.getElementById('preview-bar');
+    if (bar) bar.style.background = `linear-gradient(90deg, ${purple}, ${blue}, ${teal})`;
+}
+
+function selectFont(fontName) {
+    document.querySelectorAll('.font-preview').forEach(el => el.classList.remove('selected'));
+    const key = fontName.replace(/\s/g,'_');
+    const el = document.getElementById(`font-opt-${key}`);
+    if (el) el.classList.add('selected');
+    appData.theme.fontFamily = fontName;
+}
+
+async function saveTheme() {
+    appData.theme.logoText = document.getElementById('th-logo-text').value;
+    appData.theme.logoSubText = document.getElementById('th-logo-sub').value;
+    appData.theme.logoEmoji = document.getElementById('th-logo-emoji').value;
+    appData.theme.logoUrl = document.getElementById('th-logo-url').value;
+    appData.theme.accentBlue = document.getElementById('th-blue').value;
+    appData.theme.accentPurple = document.getElementById('th-purple').value;
+    appData.theme.accentTeal = document.getElementById('th-teal').value;
+    appData.theme.bgPrimary = document.getElementById('th-bg').value;
+    appData.theme.tickerMessages = document.getElementById('th-ticker').value;
+
+    applyTheme(appData.theme);
+    await saveToDB();
+    closeModal();
+}
+
+// ======================== CONTENT SECTION ========================
+function renderContentSection(activePage) {
+    const mc = document.getElementById('modal-content');
+
+    const contentTabs = [
+        { id: 'dashboard', label: '📊 Dashboard' },
+        { id: 'reminders', label: '📌 Reminders' },
+        { id: 'checklist', label: '✅ Checklist' },
+        { id: 'announcements', label: '📢 Announcements' },
+        { id: 'props', label: '🖼️ Props' },
+    ];
+
+    mc.innerHTML = `
+        <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08);">
+            ${contentTabs.map(t => `
+                <button class="modal-tab ${t.id === activePage ? 'active' : ''}" onclick="switchContentTab('${t.id}')">${t.label}</button>
+            `).join('')}
+        </div>
+        <div id="content-section-body"></div>
+    `;
+
+    renderContentTab(activePage);
+}
+
+function switchContentTab(tab) {
+    document.querySelectorAll('#modal-content .modal-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    renderContentTab(tab);
+}
+
+function renderContentTab(tab) {
+    const body = document.getElementById('content-section-body');
+    if (!body) return;
+
+    if (tab === 'dashboard') {
+        const { kpi } = appData;
+        body.innerHTML = `
             <div class="form-group"><label>Running QA Score (%)</label><input type="number" id="edit-qa" value="${kpi.qaScore}" min="0" max="100"></div>
             <div class="form-group"><label>QA Goal (%)</label><input type="number" id="edit-qa-goal" value="${kpi.qaGoal}" min="0" max="100"></div>
             <div class="form-group"><label>Collected Hours</label><input type="number" id="edit-hours" value="${kpi.hours}" min="0"></div>
             <div class="form-group"><label>Hours Goal</label><input type="number" id="edit-hours-goal" value="${kpi.hoursGoal}" min="0"></div>
-            <hr style="border-color: rgba(255,255,255,0.08); margin: 16px 0;">
+            <hr class="section-divider">
             <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Failed Videos</div>
             ${appData.failedVideos.map((v, i) => `
                 <div style="display: flex; gap: 8px; margin-bottom: 8px; align-items: center;">
@@ -1135,7 +1316,7 @@ function renderModalContent(section) {
                     <input type="text" id="fv-reason-${i}" value="${v.reason}" placeholder="Reason" style="flex: 1.5;">
                 </div>
             `).join('')}
-            <hr style="border-color: rgba(255,255,255,0.08); margin: 16px 0;">
+            <hr class="section-divider">
             <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Task IDs</div>
             ${appData.taskIds.map((t, i) => `
                 <div style="display: flex; gap: 8px; margin-bottom: 8px; align-items: center;">
@@ -1149,9 +1330,8 @@ function renderModalContent(section) {
                 <button class="btn btn-primary" onclick="saveDashboard()">💾 Save</button>
             </div>
         `;
-    } else if (section === 'reminders') {
-        mc.innerHTML = `
-            <h2>📌 Edit Reminders</h2>
+    } else if (tab === 'reminders') {
+        body.innerHTML = `
             <div id="reminders-edit-list">
                 ${appData.reminders.map((r, i) => `
                     <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 12px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.06);">
@@ -1171,9 +1351,8 @@ function renderModalContent(section) {
                 <button class="btn btn-primary" onclick="saveReminders()">💾 Save</button>
             </div>
         `;
-    } else if (section === 'checklist') {
-        mc.innerHTML = `
-            <h2>✅ Edit Checklist</h2>
+    } else if (tab === 'checklist') {
+        body.innerHTML = `
             <div id="checklist-edit-list">
                 ${appData.checklist.map((item, i) => `
                     <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 12px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.06);">
@@ -1192,9 +1371,8 @@ function renderModalContent(section) {
                 <button class="btn btn-primary" onclick="saveChecklist()">💾 Save</button>
             </div>
         `;
-    } else if (section === 'announcements') {
-        mc.innerHTML = `
-            <h2>📢 Edit Announcements</h2>
+    } else if (tab === 'announcements') {
+        body.innerHTML = `
             <div id="ann-edit-list">
                 ${appData.announcements.map((a, i) => `
                     <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 12px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.06);">
@@ -1221,12 +1399,9 @@ function renderModalContent(section) {
                 <button class="btn btn-primary" onclick="saveAnnouncements()">💾 Save</button>
             </div>
         `;
-    } else if (section === 'props') {
-        mc.innerHTML = `
-            <h2>🖼️ Edit Props Visual Gallery</h2>
-            <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.6;">
-                Paste a direct image URL (from Google Drive, Imgur, etc.) for each sample. Use the Category to tag it as Correct, Incorrect, or a Tip.
-            </p>
+    } else if (tab === 'props') {
+        body.innerHTML = `
+            <div class="info-box">💡 Paste a <strong>direct image URL</strong> for each sample. For Google Drive: right-click image → "Get link" → change to "Anyone with the link" → use the direct link format.</div>
             <div id="props-edit-list">
                 ${appData.props.map((p, i) => `
                     <div class="prop-edit-block">
@@ -1274,7 +1449,7 @@ function previewPropImage(i) {
     }
 }
 
-// SAVE FUNCTIONS
+// ======================== SAVE FUNCTIONS ========================
 async function saveDashboard() {
     appData.kpi.qaScore = parseFloat(document.getElementById('edit-qa').value) || 0;
     appData.kpi.qaGoal = parseFloat(document.getElementById('edit-qa-goal').value) || 100;
@@ -1303,8 +1478,8 @@ async function saveReminders() {
     await saveToDB(); closeModal(); renderReminders();
 }
 
-function deleteReminder(i) { appData.reminders.splice(i, 1); renderModalContent('reminders'); }
-function addReminder() { appData.reminders.push({ title: 'New Reminder', body: 'Enter reminder text here.', icon: '📝', color: 'linear-gradient(135deg, #1a0533, #2d1060)', border: 'rgba(123,47,255,0.4)' }); renderModalContent('reminders'); }
+function deleteReminder(i) { appData.reminders.splice(i, 1); renderContentTab('reminders'); }
+function addReminder() { appData.reminders.push({ title: 'New Reminder', body: 'Enter reminder text here.', icon: '📝', color: 'linear-gradient(135deg, #1a0533, #2d1060)', border: 'rgba(123,47,255,0.4)' }); renderContentTab('reminders'); }
 
 async function saveChecklist() {
     appData.checklist = appData.checklist.map((item, i) => ({
@@ -1316,8 +1491,8 @@ async function saveChecklist() {
     renderChecklist();
 }
 
-function deleteChecklist(i) { appData.checklist.splice(i, 1); renderModalContent('checklist'); }
-function addChecklistItem() { appData.checklist.push({ text: 'New Task', sub: 'Description here' }); renderModalContent('checklist'); }
+function deleteChecklist(i) { appData.checklist.splice(i, 1); renderContentTab('checklist'); }
+function addChecklistItem() { appData.checklist.push({ text: 'New Task', sub: 'Description here' }); renderContentTab('checklist'); }
 
 async function saveAnnouncements() {
     appData.announcements = appData.announcements.map((a, i) => {
@@ -1334,8 +1509,8 @@ async function saveAnnouncements() {
     await saveToDB(); closeModal(); renderAnnouncements();
 }
 
-function deleteAnnouncement(i) { appData.announcements.splice(i, 1); renderModalContent('announcements'); }
-function addAnnouncement() { appData.announcements.unshift({ tag: 'info', title: 'New Announcement', body: 'Enter details here.', date: 'Just now', color: '#00c8ff' }); renderModalContent('announcements'); }
+function deleteAnnouncement(i) { appData.announcements.splice(i, 1); renderContentTab('announcements'); }
+function addAnnouncement() { appData.announcements.unshift({ tag: 'info', title: 'New Announcement', body: 'Enter details here.', date: 'Just now', color: '#00c8ff' }); renderContentTab('announcements'); }
 
 async function saveProps() {
     appData.props = appData.props.map((p, i) => ({
@@ -1348,14 +1523,16 @@ async function saveProps() {
     await saveToDB(); closeModal(); renderPropsGallery();
 }
 
-function deleteProp(i) { appData.props.splice(i, 1); renderModalContent('props'); }
+function deleteProp(i) { appData.props.splice(i, 1); renderContentTab('props'); }
 function addProp() {
     appData.props.push({ imageUrl: '', category: 'correct', title: 'New Sample', desc: 'Describe what this image shows.', tip: '' });
-    renderModalContent('props');
+    renderContentTab('props');
 }
 
+// ======================== INIT ========================
 async function init() {
     await loadFromDB();
+    applyTheme(appData.theme);
     renderDashboard();
 }
 
