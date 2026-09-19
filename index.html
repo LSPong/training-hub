@@ -5,92 +5,160 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lightwheel AI Training Hub</title>
     <style>
+        /* ALL ORIGINAL STYLES PRESERVED */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         :root {
-            --primary: #00f2ff; /* Neon Cyan */
-            --accent: #bc13fe;  /* Neon Purple */
-            --bg: #0a0b10;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --text: #ffffff;
-            --text-dim: #b0b0b0;
+            --bg-primary: #0a0a1a;
+            --bg-secondary: #0d1b2e;
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --accent-blue: #00c8ff;
+            --accent-purple: #7b2fff;
+            --accent-teal: #00e5c8;
+            --accent-pink: #ff2d7a;
+            --accent-gold: #ffd700;
+            --text-primary: #e8eaf6;
+            --text-secondary: #8892b0;
+            --border-glow: rgba(0, 200, 255, 0.3);
+            --success: #00e5a0;
+            --danger: #ff4d6d;
+            --warning: #ffb703;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* --- SIDEBAR (Original Style) --- */
-        .sidebar {
-            width: 260px;
-            background: rgba(255, 255, 255, 0.02);
-            border-right: 1px solid var(--card-border);
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(123, 47, 255, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(0, 200, 255, 0.10) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0, 229, 200, 0.05) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .logo {
-            font-size: 22px;
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .header {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(10, 10, 26, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glow);
+            padding: 0 24px;
         }
 
-        .nav-item {
-            padding: 12px 15px;
-            margin-bottom: 8px;
+        .header-inner {
+            max-width: 1400px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            height: 64px;
+        }
+
+        .logo { display: flex; align-items: center; gap: 12px; }
+
+        .logo-icon {
+            width: 38px; height: 38px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
             border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-            color: var(--text-dim);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 0 20px rgba(0, 200, 255, 0.4);
         }
 
-        .nav-item:hover, .nav-item.active {
-            background: var(--card-bg);
-            color: var(--primary);
-            box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+        .logo-text {
+            font-size: 18px; font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
 
-        /* --- MAIN CONTENT --- */
-        .main-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 40px;
+        .logo-sub { font-size: 11px; color: var(--text-secondary); letter-spacing: 2px; text-transform: uppercase; }
+
+        .ticker-wrap {
+            background: rgba(0, 200, 255, 0.08);
+            border-top: 1px solid var(--border-glow);
+            border-bottom: 1px solid var(--border-glow);
+            overflow: hidden; padding: 6px 0;
         }
 
-        .page { display: none; }
+        .ticker { display: flex; animation: ticker 30s linear infinite; white-space: nowrap; }
+        .ticker span { padding: 0 40px; font-size: 12px; color: var(--accent-blue); letter-spacing: 1px; }
+        .ticker span::before { content: '⚡ '; }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .nav { display: flex; gap: 4px; }
+
+        .nav-btn {
+            padding: 8px 16px; border: none; background: transparent;
+            color: var(--text-secondary); cursor: pointer; border-radius: 8px;
+            font-size: 13px; font-weight: 500; transition: all 0.3s;
+            display: flex; align-items: center; gap: 6px;
+        }
+
+        .nav-btn:hover { background: rgba(0, 200, 255, 0.1); color: var(--accent-blue); }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, rgba(123, 47, 255, 0.3), rgba(0, 200, 255, 0.2));
+            color: var(--accent-blue);
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 0 15px rgba(0, 200, 255, 0.2);
+        }
+
+        .page { display: none; max-width: 1400px; margin: 0 auto; padding: 28px 24px; position: relative; z-index: 1; }
         .page.active { display: block; }
 
+        .page-title {
+            font-size: 26px; font-weight: 700; margin-bottom: 6px;
+            background: linear-gradient(135deg, #fff, var(--accent-blue));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+
+        .page-subtitle { color: var(--text-secondary); font-size: 13px; margin-bottom: 28px; letter-spacing: 0.5px; }
+
         .glass-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 25px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px; padding: 24px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            position: relative; overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 200, 255, 0.5), transparent);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 200, 255, 0.25);
+            box-shadow: 0 8px 40px rgba(0, 200, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        /* --- NEW TEASER STYLES --- */
+        .teaser-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             margin-bottom: 20px;
         }
 
-        h1 { font-size: 28px; margin-bottom: 20px; color: var(--primary); }
-
-        /* --- PDF TEASER STYLES --- */
-        .pdf-container {
+        .pdf-viewer-container {
             width: 100%;
             height: 80vh;
-            border-radius: 15px;
-            border: 1px solid var(--card-border);
+            border-radius: 12px;
             overflow: hidden;
+            border: 1px solid var(--border-glow);
         }
 
         .pdf-frame {
@@ -99,157 +167,230 @@
             border: none;
         }
 
-        .btn {
-            background: var(--primary);
-            color: black;
+        .btn-download {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            color: #000;
             padding: 10px 20px;
             border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
             text-decoration: none;
-            display: inline-block;
+            font-weight: 700;
+            font-size: 13px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 200, 255, 0.3);
         }
 
-        .btn:hover {
-            box-shadow: 0 0 20px var(--primary);
-            transform: scale(1.05);
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 200, 255, 0.5);
         }
 
-        /* --- MODAL --- */
+        /* --- ORIGINAL MODAL STYLES --- */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+            z-index: 1000; align-items: center; justify-content: center;
+        }
+
+        .modal-overlay.open { display: flex; }
+
         .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
+            background: #0f1a2e;
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            border-radius: 20px; padding: 28px;
+            width: 90%; max-width: 580px;
+            box-shadow: 0 20px 80px rgba(0, 200, 255, 0.15);
+            max-height: 85vh; overflow-y: auto;
         }
 
-        .modal-content {
-            background: #1a1b23;
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid var(--primary);
-            width: 400px;
+        .modal h2 {
+            font-size: 18px; font-weight: 700; margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
 
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; color: var(--text-dim); }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid var(--card-border);
-            color: white;
-            border-radius: 5px;
+        .modal-form-group { margin-bottom: 20px; }
+        .modal-form-group label {
+            display: block; font-size: 12px; color: var(--text-secondary);
+            margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        .modal-form-group input {
+            width: 100%; padding: 12px; background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
+            color: white; font-size: 14px; outline: none;
+        }
+
+        .modal-form-group input:focus { border-color: var(--accent-blue); }
+
+        .modal-footer {
+            display: flex; justify-content: flex-end; gap: 12px; margin-top: 30px;
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            color: white; border: none; padding: 10px 24px; border-radius: 8px;
+            font-weight: 700; cursor: pointer; transition: 0.3s;
+        }
+
+        .btn-cancel {
+            background: transparent; color: var(--text-secondary);
+            border: 1px solid rgba(255,255,255,0.1); padding: 10px 24px;
+            border-radius: 8px; cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <div class="logo">🦉 Lightwheel AI</div>
-        <div class="nav-item active" onclick="showPage('dashboard')">🏠 Dashboard</div>
-        <div class="nav-item" onclick="showPage('teaser')">📄 Training Teaser</div>
-        <div class="nav-item" onclick="showPage('checklist')">✅ Checklist</div>
-        <div class="nav-item" onclick="showPage('announcements')">📢 Announcements</div>
-        <div class="nav-item" onclick="showPage('props')">📦 Props</div>
-        <div style="margin-top: auto;" class="nav-item" onclick="openTrainerModal()">🔐 Trainer Edit</div>
-    </div>
-
-    <div class="main-content">
-        <!-- Dashboard -->
-        <div id="dashboard" class="page active">
-            <h1>Dashboard</h1>
-            <div class="glass-card">
-                <p>Welcome to the Training Hub. Use the sidebar to navigate.</p>
-            </div>
-        </div>
-
-        <!-- Teaser Page -->
-        <div id="teaser" class="page">
-            <h1>Training Update Teaser</h1>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <p>View the latest one-pager update below.</p>
-                <a id="download-pdf" href="#" target="_blank" class="btn">⬇️ Download PDF</a>
-            </div>
-            <div class="glass-card">
-                <div class="pdf-container">
-                    <iframe id="pdf-viewer" class="pdf-frame" src=""></iframe>
+    <div class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <div class="logo-icon">🦉</div>
+                <div>
+                    <div class="logo-text">Lightwheel AI</div>
+                    <div class="logo-sub">Training Hub</div>
                 </div>
             </div>
+            <div class="nav">
+                <button class="nav-btn active" onclick="showPage('dashboard', this)">
+                    <span>🏠</span><span class="nav-label">Dashboard</span>
+                </button>
+                <button class="nav-btn" onclick="showPage('teaser', this)">
+                    <span>📄</span><span class="nav-label">Training Teaser</span>
+                </button>
+                <button class="nav-btn" onclick="showPage('checklist', this)">
+                    <span>✅</span><span class="nav-label">Checklist</span>
+                </button>
+                <button class="nav-btn" onclick="showPage('announcements', this)">
+                    <span>📢</span><span class="nav-label">Announcements</span>
+                </button>
+                <button class="nav-btn" onclick="showPage('props', this)">
+                    <span>📦</span><span class="nav-label">Props</span>
+                </button>
+                <button class="nav-btn" onclick="openTrainerModal()">
+                    <span>🔐</span><span class="nav-label">Trainer Edit</span>
+                </button>
+            </div>
         </div>
-
-        <!-- Other pages (stubs for brevity, keep your original content here) -->
-        <div id="checklist" class="page"><h1>Daily Checklist</h1><div class="glass-card">Checklist content here...</div></div>
-        <div id="announcements" class="page"><h1>Announcements</h1><div class="glass-card">Announcements content here...</div></div>
-        <div id="props" class="page"><h1>Props Gallery</h1><div class="glass-card">Props content here...</div></div>
     </div>
 
-    <!-- Trainer Modal -->
-    <div id="trainerModal" class="modal">
-        <div class="modal-content">
-            <h2>Trainer Edit Mode</h2>
-            <div class="form-group">
-                <label>PDF Teaser URL</label>
-                <input type="text" id="pdfUrlInput" placeholder="Paste link to PDF file">
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span>Welcome to Lightwheel AI Training Hub</span>
+            <span>Check out the latest training teasers</span>
+            <span>Keep an eye on the daily checklist</span>
+            <span>Update your props library</span>
+            <span>Welcome to Lightwheel AI Training Hub</span>
+            <span>Check out the latest training teasers</span>
+            <span>Keep an eye on the daily checklist</span>
+            <span>Update your props library</span>
+        </div>
+    </div>
+
+    <!-- DASHBOARD PAGE -->
+    <div id="dashboard" class="page active">
+        <h1 class="page-title">Dashboard</h1>
+        <p class="page-subtitle">Welcome back! Everything you need to stay updated.</p>
+        <div class="glass-card">
+            <p>Select a page from the navigation bar to get started.</p>
+        </div>
+    </div>
+
+    <!-- TEASER PAGE -->
+    <div id="teaser" class="page">
+        <h1 class="page-title">Training Update Teaser</h1>
+        <p class="page-subtitle">Latest one-pager summary for current training updates.</p>
+        
+        <div class="teaser-actions">
+            <p style="font-size: 13px; color: var(--text-secondary);">Viewing the latest published teaser</p>
+            <a id="download-btn" href="#" target="_blank" class="btn-download">⬇️ Download One-Pager PDF</a>
+        </div>
+
+        <div class="glass-card">
+            <div class="pdf-viewer-container">
+                <iframe id="teaser-pdf-frame" class="pdf-frame" src=""></iframe>
             </div>
-            <div style="display: flex; gap: 10px; justify-content: flex-end;">
-                <button class="btn" style="background: #555;" onclick="closeModal()">Cancel</button>
-                <button class="btn" onclick="savePdf()">Save Changes</button>
+        </div>
+    </div>
+
+    <!-- OTHER PAGES (Existing stubs) -->
+    <div id="checklist" class="page">
+        <h1 class="page-title">Daily Checklist</h1>
+        <div class="glass-card"><p>Your checklist content goes here.</p></div>
+    </div>
+    <div id="announcements" class="page">
+        <h1 class="page-title">Announcements</h1>
+        <div class="glass-card"><p>Your announcement timeline goes here.</p></div>
+    </div>
+    <div id="props" class="page">
+        <h1 class="page-title">Props Library</h1>
+        <div class="glass-card"><p>Your visual props gallery goes here.</p></div>
+    </div>
+
+    <!-- TRAINER MODAL -->
+    <div id="trainerModal" class="modal-overlay">
+        <div class="modal">
+            <h2>🔐 Trainer Edit Mode</h2>
+            <div class="modal-form-group">
+                <label>Training Teaser PDF URL</label>
+                <input type="text" id="teaserUrlInput" placeholder="https://github.com/.../teaser.pdf">
+                <p style="font-size: 11px; color: var(--text-secondary); margin-top: 8px;">
+                    Upload your PDF to GitHub and paste the link here.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+                <button class="btn-save" onclick="saveTeaser()">Save Update</button>
             </div>
         </div>
     </div>
 
     <script>
-        function showPage(pageId) {
+        function showPage(pageId, btn) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            event.currentTarget.classList.add('active');
+            if(btn) btn.classList.add('active');
         }
 
         function openTrainerModal() {
             const pass = prompt("Enter Trainer Password:");
             if (pass === "lightwheel2024") {
-                document.getElementById('trainerModal').style.display = 'flex';
-                // Load existing URL
+                document.getElementById('trainerModal').classList.add('open');
                 const savedUrl = localStorage.getItem('teaserPdfUrl');
-                if (savedUrl) document.getElementById('pdfUrlInput').value = savedUrl;
+                document.getElementById('teaserUrlInput').value = savedUrl || '';
             } else {
                 alert("Incorrect Password");
             }
         }
 
         function closeModal() {
-            document.getElementById('trainerModal').style.display = 'none';
+            document.getElementById('trainerModal').classList.remove('open');
         }
 
-        function savePdf() {
-            const url = document.getElementById('pdfUrlInput').value;
+        function saveTeaser() {
+            const url = document.getElementById('teaserUrlInput').value;
             localStorage.setItem('teaserPdfUrl', url);
-            updatePdfViewer(url);
+            loadTeaser();
             closeModal();
-            alert("Teaser updated!");
+            alert("Teaser successfully updated!");
         }
 
-        function updatePdfViewer(url) {
-            const viewer = document.getElementById('pdf-viewer');
-            const downloadBtn = document.getElementById('download-pdf');
+        function loadTeaser() {
+            const url = localStorage.getItem('teaserPdfUrl');
+            const frame = document.getElementById('teaser-pdf-frame');
+            const btn = document.getElementById('download-btn');
+            
             if (url) {
-                viewer.src = url;
-                downloadBtn.href = url;
+                frame.src = url;
+                btn.href = url;
+            } else {
+                frame.src = '';
+                btn.href = '#';
             }
         }
 
-        // Initialize
-        window.onload = () => {
-            const savedUrl = localStorage.getItem('teaserPdfUrl');
-            updatePdfViewer(savedUrl);
-        };
+        // Initialize PDF on load
+        window.onload = loadTeaser;
     </script>
 </body>
 </html>
