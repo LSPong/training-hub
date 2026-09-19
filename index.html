@@ -13,11 +13,11 @@
             --accent-pink: #ff2d7a; --accent-gold: #ffd700; --text-primary: #e8eaf6;
             --text-secondary: #8892b0; --border-glow: rgba(0, 200, 255, 0.3);
             --success: #00e5a0; --danger: #ff4d6d; --warning: #ffb703;
+            --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: var(--bg-primary); color: var(--text-primary);
-            min-height: 100vh; overflow-x: hidden;
+            font-family: var(--font-family); background: var(--bg-primary);
+            color: var(--text-primary); min-height: 100vh; overflow-x: hidden;
         }
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -38,18 +38,27 @@
         .logo-icon {
             width: 38px; height: 38px; background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
             border-radius: 10px; display: flex; align-items: center; justify-content: center;
-            font-size: 18px; box-shadow: 0 0 20px rgba(0, 200, 255, 0.4);
+            font-size: 20px; box-shadow: 0 0 20px rgba(0, 200, 255, 0.4); overflow: hidden;
         }
+        .logo-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
         .logo-text {
             font-size: 18px; font-weight: 700; background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
         .logo-sub { font-size: 11px; color: var(--text-secondary); letter-spacing: 2px; text-transform: uppercase; }
-        .nav { display: flex; gap: 4px; }
+        .ticker-wrap {
+            background: rgba(0, 200, 255, 0.08); border-top: 1px solid var(--border-glow);
+            border-bottom: 1px solid var(--border-glow); overflow: hidden; padding: 6px 0;
+        }
+        .ticker { display: flex; animation: ticker 30s linear infinite; white-space: nowrap; }
+        .ticker span { padding: 0 40px; font-size: 12px; color: var(--accent-blue); letter-spacing: 1px; }
+        .ticker span::before { content: '⚡ '; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .nav { display: flex; gap: 4px; flex-wrap: wrap; }
         .nav-btn {
-            padding: 8px 16px; border: none; background: transparent; color: var(--text-secondary);
+            padding: 8px 14px; border: none; background: transparent; color: var(--text-secondary);
             cursor: pointer; border-radius: 8px; font-size: 13px; font-weight: 500; transition: all 0.3s;
-            display: flex; align-items: center; gap: 6px;
+            display: flex; align-items: center; gap: 6px; font-family: var(--font-family);
         }
         .nav-btn:hover { background: rgba(0, 200, 255, 0.1); color: var(--accent-blue); }
         .nav-btn.active {
@@ -78,29 +87,20 @@
             transform: translateY(-2px);
         }
 
-        /* --- NEW TEASER SPECIFIC STYLES (Matched to original) --- */
-        .teaser-controls {
-            display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;
-        }
-        .pdf-container {
-            width: 100%; height: 80vh; border-radius: 12px; 
-            border: 1px solid var(--border-glow); overflow: hidden;
-            background: #000;
-        }
-        .pdf-frame { width: 100%; height: 100%; border: none; }
-        .btn-dl {
+        /* --- TEASER PAGE & DRAG-DROP STYLES --- */
+        .teaser-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .btn-download {
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
-            color: #000; padding: 10px 20px; border-radius: 8px; 
-            text-decoration: none; font-weight: 700; font-size: 13px;
-            transition: 0.3s; box-shadow: 0 4px 15px rgba(0, 200, 255, 0.3);
+            color: #000; padding: 10px 20px; border-radius: 8px; text-decoration: none;
+            font-weight: 700; font-size: 13px; transition: 0.3s; box-shadow: 0 4px 15px rgba(0, 200, 255, 0.3);
         }
-        .btn-dl:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0, 200, 255, 0.5); }
+        .btn-download:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0, 200, 255, 0.5); }
+        .pdf-container { width: 100%; height: 80vh; border-radius: 12px; border: 1px solid var(--border-glow); overflow: hidden; background: #000; }
+        .pdf-frame { width: 100%; height: 100%; border: none; }
         
-        /* Drag & Drop Zone Styles */
         .upload-zone {
             border: 2px dashed var(--accent-blue); background: rgba(0, 200, 255, 0.05);
-            border-radius: 12px; padding: 30px; text-align: center;
-            cursor: pointer; transition: 0.3s; margin-bottom: 20px;
+            border-radius: 12px; padding: 40px; text-align: center; cursor: pointer; transition: 0.3s;
         }
         .upload-zone:hover, .upload-zone.dragover { background: rgba(0, 200, 255, 0.1); border-color: var(--accent-teal); }
         .upload-zone p { color: var(--text-secondary); font-size: 14px; }
@@ -113,15 +113,12 @@
         .modal-overlay.open { display: flex; }
         .modal {
             background: #0f1a2e; border: 1px solid rgba(0, 200, 255, 0.3);
-            border-radius: 20px; padding: 28px; width: 90%; max-width: 580px;
+            border-radius: 20px; padding: 28px; width: 90%; max-width: 500px;
         }
         .modal h2 { font-size: 18px; margin-bottom: 20px; color: var(--accent-blue); }
-        .modal-group { margin-bottom: 20px; }
-        .modal-group label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
-        .modal-group input { 
-            width: 100%; padding: 12px; background: rgba(255,255,255,0.05); 
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; 
-        }
+        .modal-footer { display: flex; justify-content: flex-end; gap: 12px; margin-top: 30px; }
+        .btn-save { background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue)); color: white; border: none; padding: 10px 24px; border-radius: 8px; cursor: pointer; font-weight: 700; }
+        .btn-cancel { background: transparent; color: var(--text-secondary); border: 1px solid rgba(255,255,255,0.1); padding: 10px 24px; border-radius: 8px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -158,23 +155,34 @@
         </div>
     </div>
 
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span>Welcome to Lightwheel AI Training Hub</span>
+            <span>Check out the latest training teasers</span>
+            <span>Keep an eye on the daily checklist</span>
+            <span>Update your props library</span>
+            <span>Welcome to Lightwheel AI Training Hub</span>
+            <span>Check out the latest training teasers</span>
+        </div>
+    </div>
+
     <!-- DASHBOARD -->
     <div id="dashboard" class="page active">
         <h1 class="page-title">Dashboard</h1>
         <p class="page-subtitle">Your productivity and creativity companion.</p>
         <div class="glass-card">
-            <p>Welcome to the hub! Use the menu above to access your tools.</p>
+            <p>Welcome back! Use the navigation menu above to access your training tools.</p>
         </div>
     </div>
 
     <!-- TEASER PAGE -->
     <div id="teaser" class="page">
         <h1 class="page-title">Training Update Teaser</h1>
-        <p class="page-subtitle">The latest one-pager update for the training team.</p>
+        <p class="page-subtitle">The latest one-pager summary for the training team.</p>
         
-        <div class="teaser-controls">
-            <p style="font-size: 13px; color: var(--text-secondary);">Viewing current teaser</p>
-            <a id="teaser-dl-btn" href="#" target="_blank" class="btn-dl">⬇️ Download PDF</a>
+        <div class="teaser-header">
+            <p style="font-size: 13px; color: var(--text-secondary);">Current Version</p>
+            <a id="teaser-dl-btn" href="#" target="_blank" class="btn-download">⬇️ Download PDF</a>
         </div>
 
         <div class="glass-card">
@@ -184,7 +192,7 @@
         </div>
     </div>
 
-    <!-- OTHER PAGES (Stubs to keep functionality) -->
+    <!-- OTHER PAGES STUBS -->
     <div id="checklist" class="page"><h1 class="page-title">Daily Checklist</h1><div class="glass-card">Checklist content...</div></div>
     <div id="announcements" class="page"><h1 class="page-title">Announcements</h1><div class="glass-card">Announcements content...</div></div>
     <div id="props" class="page"><h1 class="page-title">Props Gallery</h1><div class="glass-card">Props content...</div></div>
@@ -193,10 +201,9 @@
     <div id="trainerModal" class="modal-overlay">
         <div class="modal">
             <h2>🔐 Trainer Admin</h2>
-            <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">Update the training teaser PDF.</p>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">Upload a new PDF teaser for the team.</p>
             
             <div class="modal-group">
-                <label>Upload New PDF (Drag & Drop below)</label>
                 <div id="drop-zone" class="upload-zone">
                     <p>Drag and drop your PDF here <br> or <b>Click to Browse</b></p>
                     <input type="file" id="file-input" accept="application/pdf" style="display:none">
@@ -231,30 +238,21 @@
             document.getElementById('trainerModal').classList.remove('open');
         }
 
-        // --- PDF DRAG & DROP LOGIC ---
+        // PDF Drag and Drop / Upload Logic
         const dropZone = document.getElementById('drop-zone');
         const fileInput = document.getElementById('file-input');
 
         dropZone.onclick = () => fileInput.click();
 
-        dropZone.ondragover = (e) => {
-            e.preventDefault();
-            dropZone.classList.add('dragover');
-        };
-
+        dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('dragover'); };
         dropZone.ondragleave = () => dropZone.classList.remove('dragover');
-
         dropZone.ondrop = (e) => {
             e.preventDefault();
             dropZone.classList.remove('dragover');
-            const file = e.dataTransfer.files[0];
-            handlePdfFile(file);
+            handlePdfFile(e.dataTransfer.files[0]);
         };
 
-        fileInput.onchange = (e) => {
-            const file = e.target.files[0];
-            handlePdfFile(file);
-        };
+        fileInput.onchange = (e) => handlePdfFile(e.target.files[0]);
 
         function handlePdfFile(file) {
             if (!file || file.type !== 'application/pdf') {
@@ -284,7 +282,6 @@
             const pdfData = localStorage.getItem('trainingTeaserPdf');
             const frame = document.getElementById('teaser-frame');
             const btn = document.getElementById('teaser-dl-btn');
-            
             if (pdfData) {
                 frame.src = pdfData;
                 btn.href = pdfData;
